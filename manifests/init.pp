@@ -229,6 +229,8 @@ class mit_krb5(
   $krb5_conf_group          = 'root',
   $krb5_conf_mode           = '0444',
   $includedir               = $mit_krb5::params::includedir,
+  $default_etypes           = [],
+  $default_etypes_des       = [],
   $alter_etc_services       = false
 ) inherits mit_krb5::params {
   # SECTION: Parameter validation {
@@ -253,6 +255,12 @@ class mit_krb5(
     $krb5_conf_group,
     $krb5_conf_mode
   )
+
+  validate_array (
+    $default_etypes,
+    $default_etypes_des
+  )
+
   # Boolean-type parameters are not type-validated at this time.
   # This allows true/false/'yes'/'no'/'1'/0' to be used.
   #
